@@ -59,28 +59,27 @@ In addition to the metric values, we will link specific data from field visits t
 The spatial extent is Alaska and the lower 48; we project the dataset in  WGS84. The temporal extent is from 2002-2018. Each data set has a different sampling interval and data update interval. This information is documented with the data in ScienceBase. 
 
 
-Outputs
+<h1>Outputs: </h1>
 Document all outputs. Again names, links, security constraints, spatial extent and resolution, temporal extent and resolution, example output code all help speed development and ensure repeatability. We’ll also need this for the review(s).
 
 
-Constraints
+<h1>Constraints</h1>
 The data represents a subset of the metrics each program produces for each location.  Each monitoring program calculates  List and adequately explain any analytical constraints. For example, is the analysis only appropriate at a certain scale? Are there temporal aspects that must be met for a valid analysis? What conditions need to be met before performing a given analysis?
 
-Dependencies
+<h1>Dependencies</h1>
 List all dependencies. Are there specific software libraries, packages, or other BAPs that are required to do this analysis? If so, what are they called, where can they be found and what version did you use? All this will also be wrapped up in the provenance trace.
 
-Code
-Code written in R and shared in a Juyper notebook are published here in this GitHub repository. 
+<h1>Code</h1>
+Code written in R and shared in a Juyper notebook are published here in this GitLab repository. 
 
-Where is your code? It needs to be under source control in a publicly accessible repository. Most of us use GitHub for our development but that choice is yours. Note the official USGS repos are required for disseminating final, authorized for release code. What is your code written in? R? Python? We use both for the science code and a mix for operational. Note, for sanity we always try to code against APIs and standards (e.g. W3C and OGC). It is a simple best practice. Plus, we tend to capture much of this in Jupyter notebooks under source control that we can share and collaborate on.
 
-Tests
+<h1>Tests</h1>
 Tests for BAPs are both conceptual and technical. A core principle we are pursuing in the BAP quest is the idea of a logical test for the applicability of what the BAP does with an appropriate stakeholder. At this stage of our development, we need to make sure that the BAPs we are spending time on can be directly applied to resource management or policymaking decision analysis. A key element of documenting a BAP is figuring out what this use may be and designing an engagement plan for testing and incorporating results into future work.
 Also consider baking technical tests into the code part of a BAP. This is really important when we toss things to the developers. We are the domain experts. And since we have captured the previous five things, we need to communicate what the answers are to the folks that grab our science code and make it live. While they have broad and diverse experience working in this area, they may not know what the “right” answer looks like. We need to give them examples to work with and build from.
 
-Provenance
+<h1>Provenance</h1>
 Provenance is required. This is built into the system. Several of the previous items feed into that integral subsystem, so this will not be a difficult requirement to meet. We follow W3C PROV closely.
 
-Citations
+<h1>Citations</h1>
 We need them. Just as for your papers, citations provide the scholarly basis for your choice of methodology and implementation, and, given the reusable requirement, provide the background users need to understand and use your BAP for their own work.
 All of this information will be made available for the review processes. There are at least three of them. Two of these, the daily ongoing and the internal, are informal and involve working with your branch and program colleagues. The two BAPs we talked about, the ones at https://maps.usgs.gov/biogeography, have gone through both of these informal reviews. The other BAPs currently in development are queueing up for the internal. Every BAP will go through the appropriate level of formal review before it is authorized for official release.

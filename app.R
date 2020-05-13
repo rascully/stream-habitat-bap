@@ -20,8 +20,6 @@ library(jsonlite)
 library(sbtools)
 library(data.table)
 
-#install.packages("DT")
-
 #Load the data file from ScienceBase not sure if that is correct or if we should pull the data from
 authenticate_sb("rscully@usgs.gov", "PNAMPusgs28!")
 id      <-"5e3c5883e4b0edb47be0ef1c"
