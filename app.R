@@ -18,6 +18,7 @@ library(ggplot2)
 library(jsonlite)
 #install.packages("sbtools")
 library(sbtools)
+library(data.table)
 
 #install.packages("DT")
 
@@ -67,6 +68,7 @@ ui<- navbarPage(
              selectInput(inputId='metric', label="Select Metric", choices=metrics, selected='D50'),
              plotOutput("hist", height = 200), 
              selectInput(inputId='metric_y', label="Select Stream Power", choices=stream_power_metrics, selected='Grad'),
+             dataTableOutput("ProgramCount"), 
              plotOutput("plot", height = 200), 
           )),
 
@@ -111,22 +113,20 @@ server <- function(input, output) {
     qplot(nvcs_h[,1], geom='histogram')+ xlab(names(nvcs_h[1]))
   })
   
+#Table displaying the count of metrics for each program
+output$ProgramCount <- renderDataTable({
+  count_data = data %>% 
+    filter(State==input$e_id)%>%
+    select(input$metric, "Program") %>%
+    drop_na(input$metric) %>%
+    count(Program)
+    col_header = paste("Count", input$metric, "measurments in ", input$e_id)
+    setnames(count_data, c("Program", col_header))
+    datatable(count_data, options = list(dom = 't'))
+  })
   
-  #create simple scatter plot 
- # output$plot<- renderPlot({
-  #  nvcs_ec = data %>% 
-   #   filter(State==input$e_id)%>%
-    #  select(input$metric,input$metric_y, "Program")
-    #ggplot(nvcs_ec, aes(x=nvcs_ec[,1], y=nvcs_ec[,2], color=Program))+geom_point()
-   # plot(nvcs_ec)
- # })
-  
-# subset_data = data %>% 
- #    filter(State=="OR")%>%
-  #   select("Grad","RPD", "Program")
-  
-  
-    #create simple scatter plot 
+
+#create simple scatter plot 
   output$plot<- renderPlot({
   subset_data = data %>% 
       filter(State==input$e_id)%>%
@@ -134,6 +134,7 @@ server <- function(input, output) {
       sp <- ggplot(subset_data, aes(x=subset_data[,1], y=subset_data[,2], color=Program)) +geom_point() + scale_colour_manual(values=c("green","red","blue"), breaks=c("AREMP","BLM", "EPA"))
       sp + xlab(names(subset_data[1])) + ylab(names(subset_data[2]))
        })
+
   
   
 #Second Tab to pull method data from MR.org using the APIs 
