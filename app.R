@@ -16,35 +16,27 @@ library(DT)
 library(ggplot2)
 #install.packages("jsonlite")
 library(jsonlite)
+#install.packages("sbtools")
+library(sbtools)
 
 #install.packages("DT")
 
-# This should work, but for some reason I can't figure it out
-#wd<- getwd()
-#file<- paste0(wd,"/Data/All_Data_with_NVCS.csv")
-
-# Can't figure out how to retreive WD and paste into a R file name?
-wd <- "C:/Users/rscully/Documents/Projects/Habitat Data Sharing/2019_2020/Code/tributary-habitat-data-sharing-/"
-file<- paste0(wd,"Data/All_Data.csv")
-data <- read.csv(file)
-
 #Load the data file from ScienceBase not sure if that is correct or if we should pull the data from
-#authenticate_sb("rscully@usgs.gov", "PNAMPusgs28!")
-#id      <-"5e3c5883e4b0edb47be0ef1c"
-#data <- item_file_download(id,names= All_Data.csv, destionation=file.path(getwd(), "Data/All_Data.csv")
+authenticate_sb("rscully@usgs.gov", "PNAMPusgs28!")
+id      <-"5e3c5883e4b0edb47be0ef1c"
+file = paste0(getwd(), "All_Data.csv")
+item_file_download(id, names="All_Data.csv", destinations  =file.path(getwd(), "All_Data.csv"), overwrite_file = TRUE)
+data <- read.csv(paste0(getwd(), "/All_Data.csv"))
 
-metadata_file<- paste0(wd,"/Data/Metadata.xlsx")
+#Download the Metadata file 
+metadata_id = '5e41a716e4b0edb47be63b22'
+item_file_download(metadata_id, names="Metadata.xlsx", destinations  =file.path(getwd(), "Metadata.xlsx"), overwrite_file = TRUE)
+metadata_file<- paste0(getwd(),"/Metadata.xlsx")
 metadata <-as_tibble(read.xlsx(metadata_file, 3)) #read in the metadata 
  
-#remove the data collection points with blanks lat, long
-#data         <-data %>% drop_na(verbatimLongitude) %>% drop_na(verbatimLatitude)
 
 #Variables to sort data on 
 sort_variable         <- sort(unique(data$State))
-
-#Load the metric list
-#metrics_file  <- paste0(wd,"/Data/SubSetOfMetricNames.csv")
-#metrics_list  <- as_tibble(read.csv(metrics_file))
 
 # Extract the subset of metrics we are focusing on 
 metric_list <- metadata %>% 
@@ -52,7 +44,6 @@ metric_list <- metadata %>%
 
 
 #Partition out the stream power metrics and the other stream habitat metrics 
-
 stream_power_metrics  <- names(data[16:17])
 metrics               <- names(data[21:length(data)-2])
 
@@ -140,17 +131,13 @@ server <- function(input, output) {
   subset_data = data %>% 
       filter(State==input$e_id)%>%
       select(input$metric,input$metric_y, "Program")
-      sp <- ggplot(subset_data, aes(x=subset_data[,1], y=subset_data[,2], color=Program)) +geom_point()
-      sp + scale_color_manual(values=c("red","green","blue"))
+      sp <- ggplot(subset_data, aes(x=subset_data[,1], y=subset_data[,2], color=Program)) +geom_point() + scale_colour_manual(values=c("green","red","blue"), breaks=c("AREMP","BLM", "EPA"))
       sp + xlab(names(subset_data[1])) + ylab(names(subset_data[2]))
        })
   
   
-  #Second Tab to pull method data from MR.org using the APIs 
-  
-  
-  
-  #Need help formating the html table 
+#Second Tab to pull method data from MR.org using the APIs 
+#Need help formating the html table 
 output$Methods <- DT:: renderDataTable (DT::datatable({ 
   
     metric_index <- filter(metadata, Field==input$metric)
