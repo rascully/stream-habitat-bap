@@ -7,18 +7,22 @@ This Aquatic Habitat Analysis package will integrate aquatic habitat data from m
 As a proof of concept for this analysis package, we picked a subset of the higher than 300 methods calculated between four habitat monitoring programs. You can access the subset list on ScienceBase: https://www.sciencebase.gov/catalog/item/5e9f4a1882cefae35a128bd9
 
 We will build this analysis packages in two-phase.  Phase one we will focus on the following: 
-*Documenting data from the four programs
-*Building an integrated dataset 
-*Linking the data collection locations to the NHD+ 
-*Linking data to machine-readable metadata documentation 
-*In the Biogeography Map we will build resources to: 
-	** calculate the status of a specific metric based on user-defined HUC, State, Forest, BLM Management unit, or Tribal boundaries. 
-	** The distribution of a metric across the programs in relationship to stream power variables such as gradient, bank-full width, stream order 
-	**Display metadata with data 
+<ul>
+<li>Documenting data from the four programs</li>
+<li>Building an integrated dataset </li>
+<li>Linking the data collection locations to the NHD+ </li>
+<li>Linking data to machine-readable metadata documentation </li>
+<li>In the Biogeography Map we will build resources to: </li>
+	<li> calculate the status of a specific metric based on user-defined HUC, State, Forest, BLM Management unit, or Tribal boundaries. </li>
+	<li> The distribution of a metric across the programs in relationship to stream power variables such as gradient, bank-full width, stream order </li>
+	<li>Display metadata with data </li>
+	</ul>
+	
 
 Following phase one, we will gather feedback before implement step two. Phase two will address user feedback and hopeful anaysis questions such as: 
-* Determine if aquatic systems are being degraded, maintained or restored, based on disturbance and determine the direction and rate of changes in riparian and aquatic habitat over time (Figure 1)   (CITE PIBO WEBPAGE) 
-
+<ul>
+<li> Determine if aquatic systems are being degraded, maintained or restored, based on disturbance and determine the direction and rate of changes in riparian and aquatic habitat over time (Figure 1)   (CITE PIBO WEBPAGE) </li>
+</ul>
 
 
 Figure 1) Example of analysis for the trend of aquatic metric based on management type (CITE PIBO REPORT) 
@@ -28,19 +32,22 @@ Figure 1) Example of analysis for the trend of aquatic metric based on managemen
 This analysis package will provide benefits to a variety of users types. 
 
 <h2>Benefits for data users: </h2>
-* Summary analysis based on user-defined spatial and temporal extent to be used in products such as Forest Plans, Annual Reports, BLM Grazing permits 
-* Access to organized aquatic habitat metrics and indicators and metadata. Potential users Including the National Fish Habitat Monitoring Partnership and Dreissenid Mussel Risk Assessments Working Group, BLM AIM, AREMP, State of Oregon. Example: What are the biological conditions of wadable streams across all public lands in Oregon? 
+<ul>
+<li>Summary analysis based on user-defined spatial and temporal extent to be used in products such as Forest Plans, Annual Reports, BLM Grazing permits </li>
+<li>Access to organized aquatic habitat metrics and indicators and metadata. Potential users Including the National Fish Habitat Monitoring Partnership and Dreissenid Mussel Risk Assessments Working Group, BLM AIM, AREMP, State of Oregon. Example: What are the biological conditions of wadable streams across all public lands in Oregon? </li>
+</ul>
 
 <h2> Benefits for the data providers include: </h2>
-* Increase visibility and data reuse of long term, large spatial scale in-stream and upland riparian habitat monitoring data 
-* Streamline data publishing and access to long term datasets, freeing up data manager’s time 
-* Provide interactive summary analysis for spatial regions such as forests, BLM regions, states and tribal holdings answering basic management question, allowing project’s data analysts to focus on novel analysis 
-* Benefits for National Biogeographic Map: 
-* Leverage existing capacities to answer management questions for specific audiences, using resources such as BLM’s AIM database, EPA’s Water Quality Portal, USGS’ ScienceBase, StreamStats, Metadata Generator, and MonitoringResources.org. 
-* Improve access to in-stream and riparian habitat data, analysis, and metadata. 
-* Example of USGS leading efforts to share resources across agencies inside DOI (USGS and BLM) and outside the DOI (USFS)
-* Working across Mission Areas in the USGS to expand knowledge and produce FAIR data products 
-
+<ul>
+<li>Increase visibility and data reuse of long term, large spatial scale in-stream and upland riparian habitat monitoring data </li>
+<li> Streamline data publishing and access to long term datasets, freeing up data manager’s time </li>
+<li> Provide interactive summary analysis for spatial regions such as forests, BLM regions, states and tribal holdings answering basic management question, allowing project’s data analysts to focus on novel analysis </li>
+<li> Benefits for National Biogeographic Map: </li>
+<li> Leverage existing capacities to answer management questions for specific audiences, using resources such as BLM’s AIM database, EPA’s Water Quality Portal, USGS’ ScienceBase, StreamStats, Metadata Generator, and MonitoringResources.org. </li>
+<li>Improve access to in-stream and riparian habitat data, analysis, and metadata. </li>
+<li>Example of USGS leading efforts to share resources across agencies inside DOI (USGS and BLM) and outside the DOI (USFS)</li>
+<li> Working across Mission Areas in the USGS to expand knowledge and produce FAIR data products </li>
+</ul>
 
 <h1>Inputs: </h1>
 The base of this analysis is a unified stream habitat dataset comprised of data available on the internet from the BLM AIM, the EPA NARS, and the USFS AREMP.  The combined dataset, data inputs, data exchange schema, field cross-walks are all documented on ScienceBase.  We build this data set using R in a Juyper notebook based on the rules documented in the data exchange schema and is shared in XX repository.   The dataset is published on ScienceBase as item https://www.sciencebase.gov/catalog/item/5e3c5883e4b0edb47be0ef1c. 
