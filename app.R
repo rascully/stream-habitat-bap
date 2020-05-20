@@ -22,15 +22,15 @@ library(data.table)
 
 
 #Load the data file from ScienceBase not sure if that is correct or if we should pull the data from
-authenticate_sb("rscully@usgs.gov", "PNAMPusgs28!")
-id      <-"5e3c5883e4b0edb47be0ef1c"
+#authenticate_sb("rscully@usgs.gov", "PNAMPusgs28!")
+#id      <-"5e3c5883e4b0edb47be0ef1c"
 file = paste0(getwd(), "All_Data.csv")
-item_file_download(id, names="All_Data.csv", destinations  =file.path(getwd(), "All_Data.csv"), overwrite_file = TRUE)
+#item_file_download(id, names="All_Data.csv", destinations  =file.path(getwd(), "All_Data.csv"), overwrite_file = TRUE)
 data <- read.csv(paste0(getwd(), "/All_Data.csv"))
 
 #Download the Metadata file 
-metadata_id = '5e41a716e4b0edb47be63b22'
-item_file_download(metadata_id, names="Metadata.xlsx", destinations  =file.path(getwd(), "Metadata.xlsx"), overwrite_file = TRUE)
+#metadata_id = '5e41a716e4b0edb47be63b22'
+#item_file_download(metadata_id, names="Metadata.xlsx", destinations  =file.path(getwd(), "Metadata.xlsx"), overwrite_file = TRUE)
 metadata_file<- paste0(getwd(),"/Metadata.xlsx")
 metadata <-as_tibble(read.xlsx(metadata_file, 3)) #read in the metadata 
  
@@ -187,8 +187,6 @@ output$Methods <- DT:: renderDataTable (DT::datatable({
     content = function(file) {
       write.csv(download_data(), file, row.names = TRUE)
     })
-  
-  
 }
 
 shinyApp(server = server, ui=ui)
