@@ -5,9 +5,9 @@ account: streamhabitat
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2293941
-bundleId: 3326593
+bundleId: 3329977
 url: https://streamhabitat.shinyapps.io/StreamMetricMap/
-when: 1593373382.10577
+when: 1593443786.82735
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData|README.md|Sharing In Stream Tributary Habitat Data.ipynb

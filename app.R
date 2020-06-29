@@ -138,12 +138,13 @@ output$ProgramCount <- renderDataTable({
 
 #Second Tab to pull method data from MR.org using the APIs 
 #Need help formating the html table 
-output$Methods <- DT:: renderDataTable (DT::datatable({ 
+output$Methods <- DT:: renderDataTable(DT::datatable({ 
   
     metric_index <- filter(metadata, Field==input$metric)
     mr_index     <- data.frame(select(metric_index, contains('ShortName')), select(metric_index, contains('CollectionMethod')))
     
     # add a row to put the text into 
+    mr_index <- add_row(mr_index)
     mr_index <- add_row(mr_index)
     mr_index <- add_row(mr_index)
     
@@ -157,11 +158,14 @@ output$Methods <- DT:: renderDataTable (DT::datatable({
         instruction  <-  method_text$instructions
         if (!is.null(instruction)){
           mr_index[2,i]   <- method_text$citation$title
-          mr_index[3,i]   <-  method_text$instructions
+          methodURL       <- paste0("https://www.monitoringresources.org/Document/Method/Details/", id)
+          mr_index[3,i]   <- methodURL
+          mr_index[4,i]   <-  method_text$instructions
           
         } 
       }
     }
+
     mr_index
 }))
   
