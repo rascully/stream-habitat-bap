@@ -20,6 +20,8 @@ library(jsonlite)
 library(sbtools)
 #install.packages(data.table)
 library(data.table)
+install.packages('httr')
+library(httr)
 
 #Load the data file from ScienceBase not sure if that is correct or if we should pull the data from
 #SBUserName  <- readline(prompt="ScienceBase User Name: ")
@@ -31,18 +33,21 @@ data <- read.csv(paste0(getwd(), "/All_Data.csv"))
 
 #Download the Metadata file from the GitHub Stream-Monitoring-Data-Exchange-Specifications, which is the system of record for the metadata file 
 #wd = getwd()
-metadata_file <- paste0(getwd(), "/Metadata.xlsx")
-#metadata_url <-"https://github.com/rascully/Stream-Monitoring-Data-Exchange-Specifications/blob/master/Metadata.xlsx"
-#download.file(metadata_url, metadata_file )
-metadata <-as_tibble(read.xlsx(metadata_file, 3)) #read in the metadata 
- 
+
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link, 
+           # authenticate using GITHUB_PAT
+           authenticate(Sys.getenv("GITHUB_PAT"), ""),
+           # write result to disk
+           write_disk(path = temp_file))
+metadata<- readxl::read_excel(temp_file, sheet = 3)
 
 #Variables to sort data on 
 sort_variable         <- sort(unique(data$State))
 
 # Extract the subset of metrics we are focusing on 
-metrics <- metadata%>% 
-  filter(SubsetOfMetrics== "x" | InDES == 'x')
+  metrics <- metadata%>% 
+    filter(SubsetOfMetrics== "x" | InDES == 'x')
 
 
 #Partition out the stream power metrics and the other stream habitat metrics 
